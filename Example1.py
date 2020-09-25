@@ -28,9 +28,6 @@ specialRequestsArray = []
 for a in initialSoup.find_all('a', {'class': 'grid-view-item__link grid-view-item__image-container full-width-link'}):
 	print(a['href'])
 
-
-
-#for a in initialSoup.find_all('a', {'class': 'grid-view-item__link grid-view-item__image-container full-width-link'}):
 	if (a['href'] == "/collections/frontpage/products/mystery-t-shirt"):specialRequestsArray.append("https://store.randomland.com/collections/frontpage/products/mystery-t-shirt")
 
 for a in initialSoup.find_all('a', {'class': 'grid-view-item__link grid-view-item__image-container full-width-link'}):
@@ -42,8 +39,6 @@ for a in initialSoup.find_all('a', {'class': 'grid-view-item__link grid-view-ite
 for a in initialSoup.find_all('a', {'class': 'grid-view-item__link grid-view-item__image-container full-width-link'}):   
     if( a['href'] != "/collections/frontpage/products/new-randomland-fantasy-shirts" and a['href'] != "/collections/frontpage/products/mystery-t-shirt"):
         requestsArray.append("https://store.randomland.com"+a['href'])
-
-    #requestsArray.append("https://store.randomland.com/collections/frontpage/products/mystery-t-shirt")
 print(requestsArray)
 
 
@@ -55,17 +50,9 @@ def getRequests(request):
 
 def getStatus(r):
     soup = BeautifulSoup(r.text, 'html.parser')
-   # print(r)
-    #print(soup.text)
-    #div = soup.find('div', {'class': 'product-form__item product-form__item--submit product-form__item--payment-button product-form__item--no-variants'})
-
     div = soup.find('div', {'class': 'product-form__item product-form__item--submit product-form__item--payment-button product-form__item--no-variants'})
-    #div = soup.find('div', {'class': 'product-form__item product-form__item--submit product-form__item--payment-button'})
     span = div.find('span')
-   # print(r);
-  #  print("span is" + str(span));
     product = soup.title.string
-    #print(product)
     stockstatus = span.string
     if ("Add to cart" in stockstatus):
         stockstatus = "In Stock"
@@ -73,7 +60,6 @@ def getStatus(r):
     else:
         stockstatus = "Out of Stock"
         product = product.strip()
-    #print("The product " + product + " has stock status: " + stockstatus)
     if ("In Stock" in stockstatus):
            print("The product " + product + " has stock status: " + stockstatus)
            prior_message = "The product " + product + " has stock status: " + stockstatus + " at " + str(datetime)
@@ -101,17 +87,9 @@ def getStatus(r):
 
 def getStatus2(r):
     soup = BeautifulSoup(r.text, 'html.parser')
-   # print(r)
-    #print(soup.text)
-    #div = soup.find('div', {'class': 'product-form__item product-form__item--submit product-form__item--payment-button product-form__item--no-variants'})
-
-    #div = soup.find('div', {'class': 'product-form__item product-form__item--submit product-form__item--payment-button product-form__item--no-variants'})
     div = soup.find('div', {'class': 'product-form__item product-form__item--submit product-form__item--payment-button'})
     span = div.find('span')
-   # print(r);
-  #  print("span is" + str(span));
     product = soup.title.string
-    #print(product)
     stockstatus = span.string
     if ("Add to cart" in stockstatus):
         stockstatus = "In Stock"
@@ -119,7 +97,6 @@ def getStatus2(r):
     else:
         stockstatus = "Out of Stock"
         product = product.strip()
-    #print("The product " + product + " has stock status: " + stockstatus)
     if ("In Stock" in stockstatus):
            print("The product " + product + " has stock status: " + stockstatus)
            prior_message = "The product " + product + " has stock status: " + stockstatus + " at " + str(datetime)
